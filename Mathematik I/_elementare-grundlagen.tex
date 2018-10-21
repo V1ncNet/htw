@@ -1,0 +1,222 @@
+\section{Logik}
+\lecdate{10.10.2017}
+\subsection{Aussagen und Wahrheitswerte}
+
+\paragraph{1. Definition} \parskp
+Eine Aussage ist ein aus W"ortern und/oder mathematischen Zeichen aufgebauter Ausdruck, bei dem es m"oglich und sinnvoll ist zu entscheiden, ob dieser Ausdruck \enquote{wahr} oder \enquote{falsch} ist.
+
+\paragraph{2. Bemerkung}
+\begin{itemize}
+	\item Wahrheitsgehalt \true mit \enquote w oder \enquote 1 abgek"urzt
+	\item Wahrheitsgehalt \false mit \enquote f oder \enquote 0 abgek"urzt
+	\item Typische Bezeichnungen f"ur Aussagen sind $a$, $b$, $c$, \dots
+	\item Tats"achlich gibt es in der Mathematik Aussagen, die nicht entscheidbar sind (weder \true noch \false)
+\end{itemize}
+
+\paragraph{3. Beispiel}
+\begin{enumerate}
+	\item Es gibt unendlich viele Primzahlen (\tgreen{\true})
+	\item Es gibt unendlich viele Primzahlzwillinge (\tgrey{Aussage mit unbekanntem Wahrheitswert})
+	\item $5+7=13$ (\tred{\false})
+	\item Wie sp"at ist es (\tgrey{keine Aussage})
+	\item Diese Aussage ist falsch (\tgrey{keine Aussage, da keine sinnvolle Entscheidung m"oglich})
+	\item Am 24.12. wird es schneien (\tgrey{Aussage mit unbekanntem Wahrheitswert})
+\end{enumerate}
+
+\paragraph{4. Definition} Die Negation einer Aussage ist genau dann wahr, wenn $a$ falsch ist.\\
+Bezeichnung: $\bar a, \neg a$\\
+Darstellung der Negation:  $\begin{array}{l|l}
+	a & \bar a\\\hline
+	0 & 1\\
+	1 & 0
+\end{array}$
+
+\subsection{Verkn"upfung von Aussagen}
+
+Wir definieren Verkn"upfungen von Aussagen durch die Angabe der Wahrheitstabelle
+\begin{enumerate}[label=\alph*)]
+	\item Konjunktion $a\land b$
+	\item Disjunktion $a\lor b$
+	\item Implikation $a\To b$\\
+	$a$\dots Premisse \quad $b$\dots Konklusion\\
+	Eine Implikation ist dann falsch, wenn die Premisse richtig ist und die Konklusion falsch ist. $\neg a\lor b$\\
+	\begin{align*}
+		\text{\underline{Beispiel:} } -1=1\text{ (falsch)}&\xRightarrow{sqrt}1=1\text{ (wahr)}\\
+		-1=1\text{ (falsch)}&\xRightarrow{+1}0=2\text{ (falsch)}
+	\end{align*}
+	Aus einer falsche Aussage lassen sich durch richtiges Schlie"sen sowohl falsche Aussagen, als auch richtige Aussagen erzeugen.
+	\item "Aquivalenz $a\Leftrightarrow b$\\
+	$a\Leftrightarrow b$ ist gleichbedeutend mit $(a\To b)\land(b\To a)$\\
+	Wir nutzen $:\Leftrightarrow$ um Aussagen zu definieren bzw. um verkn"upften Aussagen eine neue Bezeichnung zu geben $c:\Leftrightarrow(\bar a\land b)$
+\end{enumerate}
+$\begin{array}{c|c|c|c|c|c}
+	a & b & a\land b & a\lor b & a\To b & a\Leftrightarrow b \\\hline
+	0 & 0 & 0 & 0 & 1 & 1 \\
+	0 & 1 & 0 & 1 & 1 & 0 \\
+	1 & 0 & 0 & 1 & 0 & 0 \\
+	1 & 1 & 1 & 1 & 1 & 1
+\end{array}$
+
+\subsection{Logische Gesetze (Tautologien)}
+
+Eine Tautologie ist eine Aussagenverbindung/Verkn"upfung, die unabh"angig vom Wahrheitswert der einzelnen Aussage stets \true ist.
+\begin{enumerate}[label=\alph*)]
+	\item $a\Leftarrow \bar{\bar{a}}$ (Negation der Negation)
+	\item $a\lor a$ (Satz vom ausgeschlossenen Dritten)
+	\item $(\overline{a\land b})\Leftrightarrow\bar a\lor \bar b$ (de Morgansche Regel)\\
+	$(\overline{a\lor b})\Leftrightarrow\bar a\land \bar b$ (de Morgansche Regel)
+	\item $(a\To b)\Leftrightarrow\bar b\To\bar a$ (Kontrapositionsgesetz)
+	\item $(a\To b)\Leftrightarrow\bar a\To b$
+	\item $(a\land(a\To b))\To b$ (direkter Beweis)
+	\item $(a\land(\bar b\To\bar a))\To b$ (indirekter Beweis)
+\end{enumerate}
+Beweis mittels Wahrheitstafeln, siehe "Ubung 1\\
+Beachte: Eine "Aquivalenz ist eine Tautologie \gdw die Wahrheitswerte beider Seiten "ubereinstimmen.
+
+\lecdate{11.10.2017}
+\paragraph{6. Bemerkung (Beweistechniken)} Zu beweisen ist $b$
+\begin{enumerate}
+	\item Direkter Beweis
+	\begin{itemize}
+		\item Nachweis/Annahme von $a$ (Voraussetzung)
+		\item Nachweis, dass die Implikation $a\Leftrightarrow b$ gilt\\
+		Dann ist b wahr (Behauptung)
+	\end{itemize}
+	\item Indirekter Beweis
+	\begin{itemize}
+		\item Nachweis/Annahme von $a$ (Voraussetzung)
+		\item Annahme von $\bar b$ auf Widerspruch f"uhren (z.B. Nachweis, dass $\bar a$ gilt)\\
+		Dann ist b wahr (Behauptung)
+	\end{itemize}
+\end{enumerate}
+
+\paragraph{7. Beispiel} $a:\Leftrightarrow$, Eine Zahl ist rational, wenn sie als Bruch teilerfremd ganzer Zahl geschrieben werden kann.\\
+$b:\Leftarrow$, $\sqrt{2}$ ist irrational\\
+\\
+Zu zeigen ist $b$. Voraussetzung ist $a$\\
+Beweis (indirekt):\\
+Es gelte $\bar b$, d.h. $\sqrt{2}$ ist rational. Dann gelten folgende Schl"usse
+\begin{align*}
+	a&\To\sqrt{2}\To\frac{m}{n}\text{ mit teilerfrenden Zahlen }n\text{ und }m\\
+	&\To2=\frac{m^2}{n^2}\To2\cdot n^2=m^2\\
+	&\To2|m^2\text{ (}2\text{ ist Teiler von }m^2\text{)}\\
+	&\To2|m\\
+	&\To4|m^2\text{ (mit }m^2=2n^2\text{)}\\
+	&\To4|2n^2\\
+	&\To2|n^2\\
+	&\To2|n\\
+	&\To n\text{ und }m\text{ sind keine teilerfrenden Zahlen, da }2|m\text{ und }2|n\To\text{ Widerspruch}
+\end{align*}
+Weitere Gesetze:
+\begin{enumerate}[label=\alph*)]
+	\item $(a\land b)\Leftrightarrow(b\land a)$ (Kommutativgesetz)\\
+	$(a\lor b)\Leftrightarrow(b\lor a)$
+	\item $((a\land b)\land c)\Leftrightarrow(a\land(b\land c))$ (Assoziativgesetz)\\
+	$((a\lor b)\lor c)\Leftrightarrow(a\lor(b\lor c))$
+	\item $a\land(b\lor c)\Leftrightarrow(a\land b)\lor(a\land c)$ (Distributivgesetz)\\
+	$a\lor(b\land c)\Leftrightarrow(a\lor b)\land(a\lor c)$
+	\item $a\land1\Leftrightarrow a\qquad a\land0\Leftrightarrow0$\\
+	$a\lor1\Leftrightarrow1\qquad a\lor0\Leftrightarrow a$\\
+	$a\lor a\Leftrightarrow a\qquad a\lor a\Leftarrow a$
+	\item $a\lor(a\land b)\Leftrightarrow a$ (Absorbtionsgesetz)
+\end{enumerate}
+
+\subsection{Aussagefunktionen, Quantoren, Pr"adikatenlogik}
+$X$ sei eine Menge (Gesamtheit von bestimmten wohlunterschiedenen Objekten) $x\in X$. Die Objekte haben Eigenschaften (Pr"adikaten)
+
+\paragraph{8. Definition} (Aussagefunktion bzw. Aussageform)\\
+Ist $a(x)$ f"ur jedes $x\in X$ eine Aussage, so nennt man die Funktion $a:X\to\{\text{wahr, falsch}\}$ eine \underline{Aussagefunktion} bzw. \underline{Pr"adikat} bzw. \underline{Aussageform}.
+
+\paragraph{9. Beispiel} $X$\dots Menge der nat"urlichen Zahlen 
+\begin{itemize}
+	\item $a(x):\Leftrightarrow$ \enquote{$x$ ist eine Primzahl}
+	\item $a(5)$ \tgreen{\true}
+	\item $a(4)$ \tred{\false}
+\end{itemize}
+
+\paragraph{10. Definition} Ist eine Aussagefunktion $a$ f"ur Elemente von $X$ gegeben, do nutzten wir folgende Kurzschreibweise:
+\begin{enumerate}[label=\alph*)]
+	\item \enquote{F"ur alle $x\in X$ gilt $a(x)$}\\
+	$\Leftrightarrow:\forall x:a(x)$ (universeller Quantor, Allquantor)
+	\item \enquote{Es existiert mindestens ein $x$, f"ur welches $a(x)$ gilt}\\
+	$\Leftrightarrow:\exists  x:a(x)$ (existenzieller Quantor, Existenzquantor)
+	\item \enquote{Es existiert genau ein $x$, f"ur welches $a(x)$ gilt}\\
+	$\Leftrightarrow:\exists!x:a(x)$ (Eindeutigkeitsquantor)
+	\item \enquote{Es existiert kein $x$, f"ur welches $a(x)$ gilt}\\
+	$\Leftrightarrow:\nexists x:a(x)\Leftarrow\forall x:\overline{a(x)}$
+\end{enumerate}
+
+\paragraph{11. Bemerkung} Bei Anwendung (au"serhalb der reinen Logik) wird oft die Grundmenge mit angegeben. $\forall x\in X:a(x)$
+\begin{itemize}
+	\item Falls sich Quantoren auf eine Teilmenge $M$ von $X$ beziehen sollen, k"onnen folgende Schreibweisen verwendet werden.
+	\begin{align*}
+		\forall x\in M&:a(x)\\
+		\exists x\in M&:a(x)
+	\end{align*}
+	\item Oft werden auch $<$ und $>$ (bzw. $\le$ und $\ge$) in Verbindung mit Quantoren verwendet.
+	\[\forall\epsilon>0\exists n\in\NN:\frac{1}{n^2}<\epsilon\]
+	\enquote{F"ur alle Zahlen $\epsilon$ gr"o"ser $0$ existiert eine nat"urliche Zahl mit der Eigenschaft $\frac{1}{n^2}<\epsilon$} (\tgreen{\true})
+	\item Rechenregeln:
+	\begin{align*}
+		\overline{\forall x:a(x)}&\Leftrightarrow\exists x:\overline{a(x)}\\
+		\overline{\exists x:a(x)}&\Leftrightarrow\forall x:\overline{a(x)}
+	\end{align*}
+\end{itemize}
+
+\paragraph{12. Beispiel} $a(x):\Leftrightarrow(x^2=40)$ \tred\false\\
+Dann ist die Aussage:
+\[\overline{\exists x\in\NN:a(x)}\]
+\enquote{Es gilt nicht, dass $x\in\NN$ existiert, so dass $a(x)$ gilt}
+\[\forall x\in\NN:\overline{a(x)}\]
+\enquote{F"ur alle $x\in\NN$, gilt dass die Aussage falsch ist}
+
+\paragraph{13. Definition} \parskp
+Ist f"ur alle $x_1\in X_1,x_2\in X_2,\dots,x_n\in X_n$ $a(x_1,x_2,\dots,x_n)$ eine Aussage, so hei"st $a$ mehrstellig Aussagefunktion bzw. $n$-stellige Aussagefunktion. \newline
+Beachte: Die Grundmenge $X_i$ k"onnen, m"ussen aber nicht f"ur jede Stelle gleich sein.
+
+\paragraph{14. Bemerkung}
+Wird ein Quantor auf eine $n$-stellige Aussagefunktion angewandt, so entsteht eine $n-1$-stellige Aussagefunktion. Z.B.
+\[\exists y:a(x,y,z)\Leftrightarrow:b(x,z)\]
+Eine $0$-stellige Aussagefunktion ist eine Aussage \\
+\quad $y$ - gebundene Variable (wird durch den Existenzquantor $\exists$ gebunden)\\
+\quad $x,y$ - freie Variablen (k"onnen durch weitere Quantoren gebunden werden)
+
+\paragraph{15. Beispiel} Ein Dorf bestehe aus zwei Teilen (Oberdorf, Unterdorf)\\
+$M$ sei die Menge aller Dorfbewohner\\
+$M_1$ sei die Menge aller Bewohner des Oberdorfes\\
+$M_2$ sei die Menge aller Bewohner des Unterdorfes\\
+$k(x,y)$\dots Person $x$ aus $M$ kennt Person $y$ aus $M$\\
+Beachte: $k(x,y)\Leftrightarrow k(y,x)$
+\begin{enumerate}[label=\alph*)]
+	\item \begin{align*}
+	a(x):&\Leftrightarrow\forall y:k(x,y)&&\dots\text{Person }x\text{ kennt alle/jede Person}\\
+	b(y):&\Leftrightarrow\exists x:k(x,y)&&\dots\text{es gibt jemanden der Person }y\text{ kennt}\\
+	c(x):&\Leftrightarrow\nexists y:k(x,y)&&\dots\text{niemand kennt Person }x\\
+	d(y):&\Leftrightarrow\exists!x:k(x,y)&&\dots\text{es existiert genau eine Person, die }y\text{ kennt}\\
+	e:&\Leftrightarrow\forall x\forall y:k(x,y)&&\dots\text{alle kennen alle}\\
+	f:&\Leftrightarrow\forall y\exists x:k(x,y)&&\dots\text{jeder wird von mindestens einer Person gekannt}\\
+	g:&\Leftrightarrow\exists y\forall x:k(x,y)&&\dots\text{es gibt mind. eine Person, die alle kennt}
+	\end{align*}
+	Beachte: $f$ und $g$ sind nicht das Gleiche. Die Reihenfolge unterschiedlicher Quantoren muss beachtet werden. Bei $f$ kann f"ur jedes $y$ ein anderes x mit $k(x,y)$ existieren. Diese Abh"angigkeit wird manchmal mit $\forall y\exists x(y):k(x,y)$ ausgedr"uckt. Es gilt dennoch $gTo f$
+	\lecdate{17.10.2017}
+	\item Negation der Aussagen bzw. Aussagefunktionen aus a)
+	\begin{align*}
+		\overline{a(x)}&\Leftrightarrow\exists y:\overline{k(x,y)}&&\dots\text{Person }x\text{ kennt mindestens eine Person nicht}\\
+		\overline{b(y)}&\Leftrightarrow\forall x:\overline{k(x,y)}&&\dots\text{keiner kennt Person }y\\
+		\overline{c(x)}&\Leftrightarrow\exists y:k(x,y)&&\dots\text{Person }x\text{ kennt mind. eine Person }y\\
+		\overline{d(y)}&\Leftrightarrow(\nexists x:k(x,y))\\
+		&\lor(\exists x_1\exists x_2:(x_1\neq x_2)\\
+		&\land k(x_1,y)\land k(x_2,y))&&\dots\text{es existiert eine Person oder mind. zwei Personen,}\\
+		& &&\text{\enskip\enskip\enskip die Person }y\text{ kennen}\\
+		\overline{e}&\Leftrightarrow\exists x\exists y:\overline{k(x,y)}&&\dots\text{es gibt jemanden, der jemanden nicht kennt}\\
+		\overline{f}&\Leftrightarrow\exists y\forall x:\overline{k(x,y)}&&\dots\text{es gibt eine Person, die von allen anderen nicht gekannt wird}\\
+		\overline{g}&\Leftrightarrow\forall x\exists y:k(x,y)&&\dots\text{jeder kennt mindestens eine Person nicht}
+	\end{align*}
+	\item Ausdr"ucke mit Hilfe von Quantoren
+	\begin{align*}
+		h:&\Leftrightarrow\text{ jeder aus dem Oberdorf kennt wenigstens eine Person aus dem Unterdorf}\\
+		&\Leftrightarrow\forall x:(x\in M_1\To\exists y:(y\in M_2\land k(x,y)))\Leftrightarrow\forall x\in M_1\exists y\in m_2\\
+		i:&\Leftrightarrow\text{ es gibt jemanden im Unterdorf, der mindestens eine Person im Oberdorf kennt}\\
+		&\Leftrightarrow\exists x\in M_2\forall y\in M_1:k(x,y)\Leftrightarrow\exists x:(x\in M_2\land\forall y:(y\in M_1\To k(x,y)))
+	\end{align*}
+\end{enumerate}
