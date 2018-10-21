@@ -338,3 +338,81 @@ A_1=\{1,2\}\qquad A_2=\{2,3\}\qquad A_3=\{3,4\}\qquad \dots\qquad A_20=\{20,21\}
 	&=\bigcup_{i=1}^{22}A_i\\
 	\bigcup_{i=2}^{17}&=\{2,3,\dots,18\}
 \end{align*}
+
+\section{Relationen}
+\subsection{Grundbegriffe}
+
+\paragraph{1. Definition} \parskp
+\begin{enumerate}[label=\alph*)]
+    \item Seien $M_1$ und $M_2$ Mengen. Eine Teilmenge $T\subset M_1\times M_2$ hei"st (bin"are) Relation. Gilt $M_1=M_2=M$ so hei"st $T$ Relation auf $M$.
+    \item Seien $M_1,\dots,M_2$ Mengen. Eine Teilmente $T\le M_1\times,\dots,\times M_n$ hei"st $n$-stellige Relation.
+\end{enumerate}
+
+\paragraph{2. Bemerkung} \parskp
+\begin{itemize}
+    \item Anstelle von $(x,y)\in T$ kann auch $xTy$ \tgrey{$x$ steht in Relation $T$ zu $y$}
+    \item f"u viele wichtige Relationen gibt es spezielle Zeichen \tgrey{$x<y$, $x=y$, $x\parallel y$, $A\subset B$ usw.}
+    \item Falls $M_1=M_2=M$ hei"st $I_M=\{(x,y)|x\in M\}$ Identit"atsrelatoin
+\end{itemize}
+
+\paragraph{3. Beispiel}
+\begin{enumerate}[label=\alph*)]
+    \item $M_1=M_2=\{-2,-1,1,2\}$
+        \begin{align*}
+            T=\{(-2,2),(-2,2),(2,-2),(2,2),(-1,-1),(-1,1),(1,-1),(1,1)\}
+        \end{align*}
+        Daher $(x,y)\in T\Leftrightarrow |x|=|y|$
+    \item $M=\RR$
+        \begin{align*}
+            T=\{(x,y)\in\RR|x\le y\}
+        \end{align*}
+        also hei"st $x$ steht in Relation $T$ zu $y$, falls $x\le y$ gilt, also $xTy\Leftrightarrow x\le y$
+    \item $S=\{Berlin, \; Dresden, \; K\ddot{o}ln, \; Paris, \; Ram, \; Neapel, \; Oslo\}$\\
+        $L=\{D(eutschland), \; F(rankreich), \; B(elgien), \; I(talien), \; P(olen), \; N(orwegen)\}$\\
+        Die Relation $T\subset S\times L$ soll darstellen, welche Stadt in welchem Land liegt.
+        $T=\{(Berlin, D), (Dresden, D), (K\ddot{o}ln, D), (Paris, F), (Rom, I), (Neapel, I), (Oslo, N)\}$\\
+        \begin{tikzpicture} [scale=0.25]
+
+            \draw  (0,2) rectangle (10,0) node[pos =.5]{Berlin};
+            \draw  (0,-1) rectangle (10,-3) node[pos =.5]{Dresden};
+            \draw  (0,-4) rectangle (10,-6) node[pos =.5]{Köln};
+            \draw  (0,-7) rectangle (10,-9) node[pos =.5]{Paris};
+            \draw  (0,-10) rectangle (10,-12) node[pos =.5]{Rom};
+            \draw  (0,-13) rectangle (10,-15) node[pos =.5]{Neapel};
+            \draw  (0,-16) rectangle (10,-18) node[pos =.5]{Oslo};
+            
+            
+            \draw  (18,2) rectangle (28,0) node[pos =.5]{D};
+            \draw  (18,-1) rectangle (28,-3) node[pos =.5]{F};
+            \draw  (18,-4) rectangle (28,-6) node[pos =.5]{B};
+            \draw  (18,-7) rectangle (28,-9) node[pos =.5]{P};
+            \draw  (18,-10) rectangle (28,-12) node[pos =.5]{I};
+            \draw  (18,-13) rectangle (28,-15) node[pos =.5]{N};
+            
+            \node at (5,3) {S};
+            \node at (23,3) {L};
+            \draw[-latex] (10,1) -- (18,1);
+            \draw[-latex] (10,-2) -- (18,1);
+            \draw[-latex] (10,-5) -- (18,1);
+            \draw[-latex] (10,-8) -- (18,-2);
+            \draw[-latex] (10,-11) -- (18,-11);
+            \draw[-latex] (10,-14) -- (18,-11);
+            \draw[-latex] (10,-17) -- (18,-14);
+        \end{tikzpicture}\\
+\end{enumerate}
+
+\paragraph{4. Definition} Eigenschaften bin"arer Relationen in $M\times M$\\
+Eine Relation $T\subset M\times M$ hei"st
+\begin{enumerate}[label=\alph*)]
+    \item reflexiv, wenn $(x,x)\in T$ f"ur alle $x\in M$
+    \item symetrisch, wenn $(x,y)\in T\Rightarrow (y,x)\in T$
+    \item antisymetrisch, wenn $((x,y)\in T\land(y,x)\in T)\Rightarrow x=y$
+    \item asymetrisch, wenn $(x,y)\in T\Rightarrow (y,x)\notin T$
+    \item transitiv, wenn $((x,y)\in T\land (y,x)\in T)\Rightarrow (x,y)\in T$
+\end{enumerate}
+jeweils f"ur alle $x,y,z\in M$
+
+\paragraph{5. Beispiel} Es sei $P$ eie Menge von Personen
+\begin{enumerate}[label=\alph*)]
+    \item Eine Person $x\in P$ sei j"unger als $y\in P$, wenn ihr Geburtsdatum gr"o"ser/sp"ater als das von $y$ ist. 
+\end{enumerate}
