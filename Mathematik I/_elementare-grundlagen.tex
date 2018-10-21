@@ -220,3 +220,121 @@ Beachte: $k(x,y)\Leftrightarrow k(y,x)$
 		&\Leftrightarrow\exists x\in M_2\forall y\in M_1:k(x,y)\Leftrightarrow\exists x:(x\in M_2\land\forall y:(y\in M_1\To k(x,y)))
 	\end{align*}
 \end{enumerate}
+
+\section{Mengen}
+\subsection{Begriffe}
+
+\paragraph{1. Definition} \parskp
+Eine Menge ist die Zusammenfassung bestimmter wohl-unterschiedener Objekte (Elemente) unserer Anschauung oder unseres Denkens zu einem Ganzen.
+
+\paragraph{2. Bemerkung} Naiver Mengenbegriff f"uhrt zu Widerspr"uchen. \newline
+Beachte die Menge aller Mengen, die sich nicht selbst enthalten.
+\[
+x=\{A|A\text{ Menge },A\notin A\}
+\]
+
+\paragraph{3. Frage} Gilt $X\in X$?\\
+Wenn $X\in X\To X\notin X$ \Lightning\\
+Wenn aber $X\notin X\To X\in X$ \Lightning\\
+Die Widerspr"uche k"onnen umgangen werden, wenn man nur Teilmengen einer sog. Grundmenge betrachtet
+\begin{itemize}
+	\item meist gro"se Buchstaben f"ur Mengen: $A$, $B$, \dots
+	\item $x\in M$ hei"st $x$ ist ein Element der Menge $M$
+	\item $x\notin M$ hei"st $x$ ist kein Element der Menge $M$
+\end{itemize}
+
+\paragraph{4. Schreibweise} \parskp
+$M=\{\dots\}$\\
+$M=\{x|a(x)\}$ \dots mit $a(x)$ - Aussagen die genau f"ur die Elemente aus $M$ \true ist
+
+\paragraph{5. Beispiel}
+\begin{itemize}
+	\item $\NN=\{1,2,3,\dots\}$ \tgrey{Nat"urliche Zahlen}
+	\item $\NN_0=\NN\cup\{0\}=\{0,1,2,\dots\}$ \tgrey{Nat"urliche Zahlen mit $0$}
+	\item $\ZZ=\{\dots,-3,-2,-1,0,1,2,3,\dots\}$ \tgrey{Ganze Zahlen}
+	\item $\QQ=\{x|x=\frac{m}{n}\text{ mit }n\in\ZZ,m\in\ZZ,n\neq0\}$ \tgrey{Rationale Zahlen}
+	\item $\RR$\dots Menge der \tgrey{reellen Zahlen}, bestehend aus der Menge der rationalen Zahlen und allen Zahlen, die sich beliebig genau durch rationale Zahlen approximieren lassen
+	\item $\CC=\{z|z=x+\mathrm iy, x,y\in\RR,\mathrm i^2=-1\}$
+	\item $\emptyset$\dots Leere Menge. Die Menge die kein Element enth"alt. Z.B. $\{x\in\RR|x^2=-1\}=\emptyset$
+\end{itemize}
+
+\paragraph{6. Beispiel}
+\begin{itemize}
+	\item $M_1$\dots Menge aller Primzahlen kleiner $10$: $M_1=\{2,3,4,7\}$
+	\item $M_2$\dots Menge aller reellen Zahlen, die echt zwischen $0$ und $1$ liegen:\\ $M_2=(0,1)=\{x\in\RR|0<x<1\}$
+\end{itemize}
+
+\paragraph{7. Definition} Es seien $a,b\in\RR$ mit $a<b$.\parskp
+Dann schreiben wir:
+\begin{align*}
+	[a,b]&:=\{x\in\RR|a\le x\le b\}\\
+	(a,b)&:=\{x\in\RR|a<x<b\}\\
+	(a,b]&:=\{x\in\RR|a<x\le b\}\\
+	[a,b)&:=\{x\in\RR|a\le x<b\}\\
+	(-\infty,b]&:=\{x\in\RR|a\le b\}\\
+\end{align*}
+
+\subsection{Mengenverkn"upfungen}
+\paragraph{8. Definition} Seien $a$ und $B$ Mengen
+\begin{enumerate}[label=\alph*)]
+	\item $A=B$, falls $\forall x:(x\in A\Leftrightarrow x\in B)$ \tgrey{Teilmenge}
+	\item $A\subset B$ bzw. $A\subseteq B$, falls $\forall x:(x\in A\To x\in B)$\\
+	$A\subsetneq B$, falls $A\subset B$ und $A\neq B$ \tgrey{echte Teilmenge}
+	\item $A\cap B:=\{x|x\in A\land x\in B\}$ \tgrey{Schnittmenge}
+	\item $A\cup B:=\{x|x\in A\lor x\in B\}$ \tgrey{Vereinigungsmenge}
+	\item $A\setminus B:=\{x|x\in A\land x\notin B\}$ \tgrey{Differenzmenge}
+	\item $\bar A=E\setminus A:=\{x|x\notin A\}$ \tgrey{Komplement"armenge}
+\end{enumerate}
+\lecdate{18.10.2017}
+\paragraph{9. Bemerkung} Gesetzm"a"sigkeiten
+\begin{enumerate}[label=\alph*)]
+	\item $(A\cup B)\cup C=A\cup(B\cup C)$\\
+	$(A\cap B)\cap C=A\cap(B\cap C)$ \tgrey{Assoziativgesetz}
+	\item $A\cup B=B\cup A$\\
+	$A\cap B=B\cap A$ \tgrey{Kommutativgesetz}
+	\item $(A\cup B)\cap C=(A\cup B)\cap(A\cup C)$\\
+	$(A\cap B)\cup C=(A\cap B)\cup(A\cap C)$\tgrey{Distributivgesetz}
+	\item $\overline{(A\cup B)}=\bar A\cap\bar B$\\
+	$\overline{(A\cap B)}=\bar A\cup\bar B$ \tgrey{De Morgansche Gesetze}
+	\item Schreibweise: Sei $\mathrm I$ eine Indexmenge, z.B. $\{1,2,3,\dots\}, \NN,\ZZ,\RR$, dann
+	\begin{align*}
+		\bigcup_{i=1}^nA_i&:=\{x|\exists i\in I:x\in A_i\}\\
+		\bigcap_{i=1}^nA_i&:=\{x|\forall i\in I:x\in A_i\}
+	\end{align*}
+\end{enumerate}
+
+\paragraph{10. Beispiel}
+\[
+A=\{1,2,3,4,5\}\qquad B=\{3,4,5,6,7\}\qquad C=\{2,3\}
+\]
+\begin{align*}
+	A\cap B&=\{3,4,5\}&&A\setminus B=\{1,2\}\\
+	A\cup B&=\{1,2,3,4,5,6,7\}&&C\subset A\text{, }C\subseteq A
+\end{align*}
+
+\paragraph{11. Definition} Seien $A$ und $B$ Mengen
+\begin{itemize}
+	\item F"ur $e\in A$ und $b\in B$ hei"st $(a,b)$ geordnetes Paar (2-Tupel). Zwei geordnete Paare $(a,b)$ und $(a^{'},b^{'})$ sind gleich \gdw $a=a^{'}$ und $b=b^{'}$
+	\item Das kartesische Produkt von $A$ und $B$ ist gegeben durch $A\times B=\{(a,b)|a\in A, b\in B\}$
+\end{itemize}
+
+\paragraph{12. Beispiel}
+\begin{itemize}
+	\item $(1,3)\neq(3,1)$
+	\item $(0,2)\neq2$
+	\item $\{11,17\}\times\{42,12\}=\{(11,42), (11,12), (17,42), (17,12)\}$
+\end{itemize}
+
+\paragraph{13. Definition} \parskp
+Dem entsprechend lassen sich $n$-Tupel und $n$-fache Produkte von Mengen definieren. Sind $A_1,\dots,A_n$ Mengen: $A_1\times A_2\times\dots\times A_n=\{a_1,\dots,a_n|a_i\in A;\text{ f"ur alle }i\in\{1,\dots,n\}\}$\\
+Gilt: $A=A_1=A_2=A_n$, dann $A_1\times\dots\times A_n=A\times\dots\times A=:A^n$
+
+\paragraph{14. Beispiel}
+\[
+A_1=\{1,2\}\qquad A_2=\{2,3\}\qquad A_3=\{3,4\}\qquad \dots\qquad A_20=\{20,21\}
+\]
+\begin{align*}
+	A_1\cup A_2\cup\dots\cup A_n&=\{1,2,3,\dots,21\}\\
+	&=\bigcup_{i=1}^{22}A_i\\
+	\bigcup_{i=2}^{17}&=\{2,3,\dots,18\}
+\end{align*}
