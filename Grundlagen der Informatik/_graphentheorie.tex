@@ -1,9 +1,55 @@
+\begin{tikzpicture}[scale=0.5,remember picture]
+    \begin{scope}
+    \begin{pgfinterruptboundingbox}
+        \draw [rotate=-10, clip]  (4.1,2.8) rectangle (5.6,-0.2)[reverseclip];
+        \draw [rotate=30, clip] (0.5,1.4) rectangle (2,-1.6)[reverseclip];
+        \draw [rotate=10, clip] (3.5,-3.8) rectangle (5,-6.8)[reverseclip];
+        \draw [rotate=-10, clip] (10.5,4.2) rectangle (12,1.2)[reverseclip];
+        \draw [rotate=15, clip] (9.3,-6.2) rectangle (10.8,-9.2)[reverseclip];
+        \draw [rotate=91, clip] (-3,-6.6) rectangle (-1.5,-9.6)[reverseclip];
+        \draw [rotate=-20, clip] (2.1,-2.2) rectangle (3.6,-5.2)[reverseclip];
+        \end{pgfinterruptboundingbox}
+        \draw [blue] plot[smooth, tension=.7] coordinates {(-8,-2) (-4,-1) (-1,0) (3,1) (8,1) (13,1) (15,1)};
+        \draw [blue] plot[smooth, tension=.7] coordinates {(-8,-3) (-3,-3) (0.8,-4.6) (7,-5) (14,-5) (15,-5)};
+        \draw [blue] plot[smooth, tension=.7] coordinates {(-2,-2) (0,-1) (3,0) (7,-1) (7,-3) (4,-4) (-1,-3) (-2,-2)};
+        \draw [blue] plot[smooth, tension=.7] coordinates {(15,0) (10,0) (9,-2) (10,-4) (14,-4) (15,-4)};
+    \end{scope}
+
+    \draw [thick, green]  plot[smooth, tension=.7] coordinates {(5.2,4.2) (0.8,3.4) (0.4,1.2) (1.8,-0.6) (3.2,-2) (4.8,-2.6) (5.4,-4.6) (5,-8.4)};
+    \draw [thick, green]  plot[smooth, tension=.7] coordinates {(5.2,4.2) (4.8,2.6) (5,1) (4.4,-1.2) (3.2,-2) (1.8,-2.6) (1.2,-4.2) (0.8,-6.4) (3,-7.6) (5,-8.4)};
+    \draw [thick, green]  plot[smooth, tension=.7] coordinates {(5.2,4.2) (10.6,3.2) (11.8,2) (11.4,-0.4) (11.2,-2.4) (11.6,-3.8) (12,-7.2) (7.4,-7.8) (5,-8.4)};
+    \draw [thick, green]  plot[smooth, tension=.7] coordinates {(3.2,-2) (5,-2) (8,-1.8) (10.2,-2.4) (11.2,-2.4)};
+
+    \node [green] at (3.2,-2) [circle] {$\bullet$};
+    \node [green]at (11.2,-2.4) [circle] {$\bullet$};
+    \node [green]at (5,-8.4) [circle] {$\bullet$};
+    \node [green]at (5.2,4.2) [circle] {$\bullet$};
+\end{tikzpicture}
+
 \paragraph{Definition} \parskp
 Ein Graph ist ein Paar $V,E$ mit $V\ne\emptyset$ und $E$ ist eine zweielementige Menge von $V$. $V$ ist die
 Menge der Knoten. $E$ die Menge der Kanten.
 
-\paragraph{Beispiel}
-% TODO Draw sample graphs
+\paragraph{Beispiel} \parskp
+\begin{tikzpicture}
+    \node[shape=circle,draw=black] (1) at (0,0)   {1};
+    \node[shape=circle,draw=black] (2) at (-2,-2) {2};
+    \node[shape=circle,draw=black] (3) at (2,-2)  {3};
+
+    \path (1) edge (2);
+    \path (2) edge (3);
+    \path (3) edge (1);
+\end{tikzpicture}\\
+Graph $G=(\{1,2,3\},\{1,2\},\{2,3\},\{3,1\})$\\
+\\
+\begin{tikzpicture}
+    \node[shape=circle,draw=black] (1) at (0,0)  {1};
+    \node[shape=circle,draw=black] (2) at (4,0)  {2};
+    \node[shape=circle,draw=black] (3) at (2,-2) {3};
+
+    \path (1) edge (2);
+\end{tikzpicture}\\
+Graph $H=(\{1,2,3\},\{1,2\})$
 
 \paragraph{Definition} \parskp
 Ein Graph hei"st vollst"andig, wenn alle Knoten paawrweise miteinander verbunden sind.
@@ -18,7 +64,25 @@ Ein Knoten $v$ besitzt den Grad $k$, wenn er mit genau $k$ Kanten verbunden ist.
     \sum_{v\in V}deg=2|E|
 \end{align*}
 
-% TODO Draw sample Graphs
+\begin{tikzpicture}
+    \node[shape=circle,draw=black] (1) at (0,0) {1};
+    \node[shape=circle,draw=black] (2) at (2,0) {1};
+
+    \path (1) edge (2);
+\end{tikzpicture}
+$|E|=1$\qquad
+\begin{tikzpicture}
+    \node[shape=circle,draw=black] (1) at (0,0) {2};
+    \node[shape=circle,draw=black] (2) at (2,2) {3};
+    \node[shape=circle,draw=black] (3) at (4,0) {2};
+    \node[shape=circle,draw=black] (4) at (6,2) {1};
+
+    \path (1) edge (2);
+    \path (2) edge (3);
+    \path (3) edge (1);
+    \path (2) edge (4);
+\end{tikzpicture}
+$|E|=4$
 
 \paragraph{Beweis} \parskp
 Wenn wir jede Kante in der Mitte durchschneiden, ist jeder Knoten $V$ mit genau $deg(v)$ H"alften verbunden.
