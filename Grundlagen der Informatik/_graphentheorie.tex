@@ -1,0 +1,161 @@
+\paragraph{Definition} \parskp
+Ein Graph ist ein Paar $V,E$ mit $V\ne\emptyset$ und $E$ ist eine zweielementige Menge von $V$. $V$ ist die
+Menge der Knoten. $E$ die Menge der Kanten.
+
+\paragraph{Beispiel}
+% TODO Draw sample graphs
+
+\paragraph{Definition} \parskp
+Ein Graph hei"st vollst"andig, wenn alle Knoten paawrweise miteinander verbunden sind.
+\subparagraph{Folgerung} Ein vollst"andiger Graph mit $n$ Knoten besitzt $\binom{n}{2}$ Kanten.
+
+\paragraph{Definition}  \parskp
+Ein Knoten $v$ besitzt den Grad $k$, wenn er mit genau $k$ Kanten verbunden ist.
+\subparagraph{Notation} $deg(v)=k$
+
+\paragraph{Satz} F"ur jeden Graphen $(V,E)$ gilt
+\begin{align*}
+    \sum_{v\in V}deg=2|E|
+\end{align*}
+
+% TODO Draw sample Graphs
+
+\paragraph{Beweis} \parskp
+Wenn wir jede Kante in der Mitte durchschneiden, ist jeder Knoten $V$ mit genau $deg(v)$ H"alften verbunden.
+Die Summe aller Knotengrade ist dann die Anzahl der Knotenh"alften.
+
+\paragraph{Definition}
+\begin{itemize}
+    \item Ein \textbf{Weg} ist eine Folge von Knoten $v_0,\cdots,v_l$ mit $\{v_k,v_{k+1}\}$ f"ur $1\le k<l$.
+          % TODO Draw sample Graphs
+    \item Ein Graph ist \textbf{zusammenh"angend}, wenn es f"ur alle Knoten $u,v$, $u\ne v$ einen Weg von $u$
+          nach $v$ gibt.
+    \item Ein \textbf{Pfad} ein Wen, der keine Knoten mehrfach enth"alt.
+    \item Ein \textbf{Kreis} ist ein Weg, $v_0,\cdots,v_l$ mit $v_0=v_l$, der keinen Knoten mehrfach enth"alt
+          bis auf Startknoten und Endknoten und eine L"ange $\ge3$ beitzt.
+\end{itemize}
+
+\section{B"aume}
+
+\paragraph{Definition} \parskp
+Ein \textbf{Baum} ist ein zusammenh"angender Graph, der keinen Kreis enth"alt.\\
+\\
+Ein Blatt ist ein Knoten mit dem Grad $\le1$
+% TODO Draw sample Graphs
+
+\paragraph{Lemma} Jeder Baum enth"lt ein Blatt.
+
+\paragraph{Satz} Sei $B=(V,E)$ ein Baum. \\
+Dann gilt $|E|=|V|-1$.
+% TODO Draw sample Graph
+
+\paragraph{Beweis} Induktion nach der Anzahl der Knoten $n$
+\begin{itemize}
+    \item[$n=1$] Ein Baum mit einem Knoten enth"alt keine Kanten.
+    \item[$n\rightarrow n+1$] Sei $B$ ein Baum mit $n+1$ Knoten. Da $B$ ein Baum ist, enth"alt $B$ ein Blatt.
+                              Indem wir dieses Blatt und die dazugeh"orige Kante entfernen, erhalten wir einen
+                              Baum $B'$ mit $n$ Knoten. Nach Induktionsvoraussetzung folgt:\\
+                              $B'$ enth"alt $n-1$ Knoten. Indem wir die oben entfernten Knoten mit samt der mit
+                              ihm verbundenene Kante hinzuf"ugen, erhalten wie den Baum $B$. Dieser besitzt $n+1$
+                              Knoten und $n$ Kanten.
+\end{itemize}
+
+\paragraph{Definition} \parskp
+Ein \textbf{bin"arer Wurzelbaum} ist ein Baum, der eine Knoten-Wurzel besitzt und in dem jeder Knoten, der
+kein Blatt ist genau zwei Nachfolger besitzt.\\
+\\
+Dazu gelichwetig ist die folgende \underline{induktive Definition}.
+\begin{itemize}
+    \item Ein Knoten $v$ ist ein bin"arer Wurzelbaum mit Wurzel $v$.
+    \item Seien $l,r$ bin"are Wurzelb"aume mit den Wurzeln $root(l)$, $root(r)$. Wenn wir einen neune
+          Knoten $v$ mit $root(l)$, $root(r)$ verbinden, ist das Ergebnis ein bin"arer Wurzelbaum mit
+          Wurzel $v$.
+\end{itemize}
+
+\paragraph{Satz} \parskp
+Sei $B$ ein bin"arer Wurzelbaum, in dem jeder Pfad von der Wurzel zu einem Blatt der L"ange $k$ hat
+($B$ besitzt die $k$), dann besitzt $B$ genau $2^k$ Bl"atter. % TODO WTF?
+
+\subparagraph{Beweis} Induktion nach $k$.
+\begin{itemize}
+    \item[$k:=0$] In diesem Fall besteht $B$ nur aus der Wurzel und besitzt $2^0=1$ Bl"atter.
+    \item[$k\rightarrow k+1$] Sei $B$ ein Baum der Tiefe $k+1$. Jeder der beiden Teilb"aum unter der Wurzel
+                            ist ein bin"arer Wurzelbaum der Tiefe $k$. Nach Induktionsvoraussetzung besitzt
+                            jeder dieser Teilb"aume genau $2^k$ Bl"atter. Folglich besitzt $B$ genau
+                            $2^{k+1}$ Bl"tter.
+\end{itemize}
+
+\section{Datenstrukturen zur Representation}
+
+Zur Darstellung von Graphen werden \textbf{Adjazenzmatrizen} und \textbf{Adjazenzlisten} verwendet.
+
+\paragraph{Definition} Sei $G=(V,E)$ ein Graph
+\begin{itemize}
+    \item Die Adjazenzmatrix $G$ ist eine Matrix $(a_{uv})$ mit
+          \[
+            a_{uv}=\begin{cases}
+                1 & \for \{u,v\}\in E\\
+                0 & \text{sonst}
+            \end{cases}
+          \]
+    \item Die Adjazenzliste von $G$ ist ein Feld, dass and der Position $u\in V$ eine Liste aller Knoten
+          $v\in V$ mit $\{u,v\}\in E$ besitzt.
+\end{itemize}
+
+Der Speicherbedarf der Adjazenzmatrix liegt in $O(|V|^2)$, der der Adjazenzliste in $O(|V|+|E|)$. Bei
+Graphen mit wenig Kanten ist die Adjazenzliste im Vorteil.\\
+\\ % TODO Draw sample Graphs
+Wurzelb"aume lassen sich durch rekursive Datenstrukturen darstellen. Jeder Knoten enth"alt dabei eine Liste
+der Nachfolgeknoten. Ein bin"arer Wurzelbaum l"asst sich darstellen durch Knotenelemente, die Zeiger links
+und rechts, f"ur den linken bzw. rechten Nachfolger besitzt.
+
+\paragraph{Beisiel} Implementierung in C
+% TODO Draw sample Graphs
+
+\section{Grundlegende Graphenalgorithmen}
+\subsection{Breitensuche und Tiefensuche}
+
+\textbf{Breitensuche} und \textbf{Tiefensuche} sind Algorithmen, un due Knoten eines Graphen systematisch zu
+durchsuchen. Die Breitensuche besucht, ausgehend von dem Startknoten, alle Nachbarn eines Knoten und dessen
+Nachbarn, bis der Zielknoten gefunden wurde.
+
+\paragraph{Breitensuche}
+\subparagraph{Beispiel} Breitensuche in einem Wurzelbaum\\
+\\ % TODO Draw sample Graphs
+Eine Breitensuche kann mit einer \textbf{Queue} implementiert werden. Eine Queue ist eine
+\textit{first in first out} (FIFO) Datenstruktur die zwei Operationen besitzt.
+\begin{itemize}
+    \item \code{v=dequeue()}
+    \item \code{enqueue(v)}
+\end{itemize}
+Eine Queue l"asst sich effizient implementieren, durch eine verkettete Liste, die einen Zeiger auf das n"achste
+Element besitzt. Damit lassen sich \code{dequeue} und \code{enqueue} in Zeit $O(1)$ ausf"uhren.
+
+\subparagraph{Algorithmus} Breitensuche (breadth first search)
+% TODO Add sample listing
+
+\subparagraph{Analyse der Lafzeit} \parskp
+Das Initialisieren des Felds \code{discovered} ben"otigt die Zeit $O(|V|)$. Im Rumpf der \code{while} Schleife
+f"allt der Aufwand $O(dev(u))$ an. Der Gesamtaufwand der \code{while} Schleife ist
+\[
+    \sum_{u\in V}O(deg(u))\le c\sum_{u\in V}deg(u)=c2|E|\in O(|E|)    
+\]
+Der Aufwand insgesamt ist daher $O(|V|+|E|)$.
+
+\paragraph{Tiefensuche}
+Die Tiefensuche verfolgt den Pfad, bis ein Knoten keine unbesuchten Nachbarn mehr besitzt.
+
+\subparagraph{Beispiel} Tiefensuche in einem Wurzelbaum\\
+\\  % TODO Draw sample Graphs
+
+\subparagraph{Implementierung} Tiefensuche (depth first search)
+\begin{enumerate}
+    \item Gleicher Algorithmus wie Breitensuche aber mit \textbf{Stack} statt Queue. Ein Stack ist ein
+          \textit{last in first out} (LIFO) Datentyp, der sich durch eine verkettete Liste implementieren
+          l"asst und zwei Operationen besitzt \code{push} und \code{pop}.
+    \item Rekursiv. In jedem Nachbarknoten wird eine neue Tiefensuche gestartet.
+\end{enumerate}
+
+\paragraph{Definition} Sei $G=(U,E)$ ein \textbf{DAG} (directed acyclic graph, gerichteter azyklischer Graph)\\
+Eine \textbf{topologische Sortierung} von $G$ ist eine Abbildung $f:V\leftarrow\NN$ mit $f(u)>f(v)$ f"ur $(u,v)\in E$.
+% TODO Draw sample Graph
