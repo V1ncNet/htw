@@ -94,7 +94,7 @@ Die Summe aller Knotengrade ist dann die Anzahl der Knotenh"alften.
           % TODO Draw sample Graphs
     \item Ein Graph ist \textbf{zusammenh"angend}, wenn es f"ur alle Knoten $u,v$, $u\ne v$ einen Weg von $u$
           nach $v$ gibt.
-    \item Ein \textbf{Pfad} ein Wen, der keine Knoten mehrfach enth"alt.
+    \item Ein \textbf{Pfad} ist ein Weg, der keine Knoten mehrfach enth"alt.
     \item Ein \textbf{Kreis} ist ein Weg, $v_0,\cdots,v_l$ mit $v_0=v_l$, der keinen Knoten mehrfach enth"alt
           bis auf Startknoten und Endknoten und eine L"ange $\ge3$ beitzt.
 \end{itemize}
@@ -107,7 +107,7 @@ Ein \textbf{Baum} ist ein zusammenh"angender Graph, der keinen Kreis enth"alt.\\
 Ein Blatt ist ein Knoten mit dem Grad $\le1$
 % TODO Draw sample Graphs
 
-\paragraph{Lemma} Jeder Baum enth"lt ein Blatt.
+\paragraph{Lemma} Jeder Baum enth"alt ein Blatt.
 
 \paragraph{Satz} Sei $B=(V,E)$ ein Baum. \\
 Dann gilt $|E|=|V|-1$.
@@ -138,7 +138,7 @@ Dazu gelichwetig ist die folgende \underline{induktive Definition}.
 
 \paragraph{Satz} \parskp
 Sei $B$ ein bin"arer Wurzelbaum, in dem jeder Pfad von der Wurzel zu einem Blatt der L"ange $k$ hat
-($B$ besitzt die $k$), dann besitzt $B$ genau $2^k$ Bl"atter. % TODO WTF?
+($B$ besitzt die L"ange $k$), dann besitzt $B$ genau $2^k$ Bl"atter. % TODO WTF?
 
 \subparagraph{Beweis} Induktion nach $k$.
 \begin{itemize}
@@ -146,7 +146,7 @@ Sei $B$ ein bin"arer Wurzelbaum, in dem jeder Pfad von der Wurzel zu einem Blatt
     \item[$k\rightarrow k+1$] Sei $B$ ein Baum der Tiefe $k+1$. Jeder der beiden Teilb"aum unter der Wurzel
                             ist ein bin"arer Wurzelbaum der Tiefe $k$. Nach Induktionsvoraussetzung besitzt
                             jeder dieser Teilb"aume genau $2^k$ Bl"atter. Folglich besitzt $B$ genau
-                            $2^{k+1}$ Bl"tter.
+                            $2^{k+1}$ Bl"atter.
 \end{itemize}
 
 \section{Datenstrukturen zur Representation}
@@ -162,10 +162,9 @@ Zur Darstellung von Graphen werden \textbf{Adjazenzmatrizen} und \textbf{Adjazen
                 0 & \text{sonst}
             \end{cases}
           \]
-    \item Die Adjazenzliste von $G$ ist ein Feld, dass and der Position $u\in V$ eine Liste aller Knoten
+    \item Die Adjazenzliste von $G$ ist ein Feld, dass an der Position $u\in V$ eine Liste aller Knoten
           $v\in V$ mit $\{u,v\}\in E$ besitzt.
 \end{itemize}
-
 Der Speicherbedarf der Adjazenzmatrix liegt in $O(|V|^2)$, der der Adjazenzliste in $O(|V|+|E|)$. Bei
 Graphen mit wenig Kanten ist die Adjazenzliste im Vorteil.\\
 \\ % TODO Draw sample Graphs
@@ -179,7 +178,7 @@ und rechts, f"ur den linken bzw. rechten Nachfolger besitzt.
 \section{Grundlegende Graphenalgorithmen}
 \subsection{Breitensuche und Tiefensuche}
 
-\textbf{Breitensuche} und \textbf{Tiefensuche} sind Algorithmen, un due Knoten eines Graphen systematisch zu
+\textbf{Breitensuche} und \textbf{Tiefensuche} sind Algorithmen, um Knoten eines Graphen systematisch zu
 durchsuchen. Die Breitensuche besucht, ausgehend von dem Startknoten, alle Nachbarn eines Knoten und dessen
 Nachbarn, bis der Zielknoten gefunden wurde.
 
@@ -200,13 +199,13 @@ Element besitzt. Damit lassen sich \code{dequeue} und \code{enqueue} in Zeit $O(
 
 \subparagraph{Analyse der Lafzeit} \parskp
 Das Initialisieren des Felds \code{discovered} ben"otigt die Zeit $O(|V|)$. Im Rumpf der \code{while} Schleife
-f"allt der Aufwand $O(dev(u))$ an. Der Gesamtaufwand der \code{while} Schleife ist
+f"allt der Aufwand $O(deg(u))$ an. Der Gesamtaufwand der \code{while} Schleife ist
 \[
     \sum_{u\in V}O(deg(u))\le c\sum_{u\in V}deg(u)=c2|E|\in O(|E|)    
 \]
 Der Aufwand insgesamt ist daher $O(|V|+|E|)$.
 
-\paragraph{Tiefensuche}
+\paragraph{Tiefensuche} \parskp
 Die Tiefensuche verfolgt den Pfad, bis ein Knoten keine unbesuchten Nachbarn mehr besitzt.
 
 \subparagraph{Beispiel} Tiefensuche in einem Wurzelbaum\\
@@ -220,6 +219,6 @@ Die Tiefensuche verfolgt den Pfad, bis ein Knoten keine unbesuchten Nachbarn meh
     \item Rekursiv. In jedem Nachbarknoten wird eine neue Tiefensuche gestartet.
 \end{enumerate}
 
-\paragraph{Definition} Sei $G=(U,E)$ ein \textbf{DAG} (directed acyclic graph, gerichteter azyklischer Graph)\\
+\paragraph{Definition} Sei $G=(V,E)$ ein \textbf{DAG} (directed acyclic graph, gerichteter azyklischer Graph)\\
 Eine \textbf{topologische Sortierung} von $G$ ist eine Abbildung $f:V\leftarrow\NN$ mit $f(u)>f(v)$ f"ur $(u,v)\in E$.
 % TODO Draw sample Graph
