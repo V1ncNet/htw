@@ -184,6 +184,27 @@ Nachbarn, bis der Zielknoten gefunden wurde.
 
 \paragraph{Breitensuche}
 \subparagraph{Beispiel} Breitensuche in einem Wurzelbaum\\
+\begin{tikzpicture}[level distance=1.5cm,
+    level 1/.style={sibling distance=3cm},
+    level 2/.style={sibling distance=1.5cm}]
+    \node {0}
+      child {node {1}
+        child {node {4}
+          child {node {8}}
+          child {node {9}}
+          child {node {10}}
+        }
+      }
+      child {node {2}
+        child {node {5}}
+        child {node {6}}
+      }
+      child {node {3}
+        child {node {7} 
+          child {node {11}}
+        }
+      };
+\end{tikzpicture}
 \\ % TODO Draw sample Graphs
 Eine Breitensuche kann mit einer \textbf{Queue} implementiert werden. Eine Queue ist eine
 \textit{first in first out} (FIFO) Datenstruktur die zwei Operationen besitzt.
@@ -195,7 +216,25 @@ Eine Queue l"asst sich effizient implementieren, durch eine verkettete Liste, di
 Element besitzt. Damit lassen sich \code{dequeue} und \code{enqueue} in Zeit $O(1)$ ausf"uhren.
 
 \subparagraph{Algorithmus} Breitensuche (breadth first search)
-% TODO Add sample listing
+\begin{lstlisting}[language=C]
+boolean bfs(node start, node end) {
+    for (v of V)
+        discovered[v] = false
+    queue.enqueue(start)
+    discovered[start] = true
+    while (!queue.isEmpty()) {
+        u = queue.dequeue()
+        if (u = end) return true
+        else
+            for (v of adj[v])
+                if (!discovered[v]) {
+                    queue.enqueue(v)
+                    discovered[v] = true
+                }
+    }
+    return false
+}
+\end{lstlisting}
 
 \subparagraph{Analyse der Lafzeit} \parskp
 Das Initialisieren des Felds \code{discovered} ben"otigt die Zeit $O(|V|)$. Im Rumpf der \code{while} Schleife
@@ -209,7 +248,30 @@ Der Aufwand insgesamt ist daher $O(|V|+|E|)$.
 Die Tiefensuche verfolgt den Pfad, bis ein Knoten keine unbesuchten Nachbarn mehr besitzt.
 
 \subparagraph{Beispiel} Tiefensuche in einem Wurzelbaum\\
-\\  % TODO Draw sample Graphs
+\begin{tikzpicture}[level distance=1.5cm,
+    level 1/.style={sibling distance=3cm},
+    level 2/.style={sibling distance=1.5cm}]
+    \node {0}
+      child {node {1}
+        child {node {2}
+          child {node {3} {
+            child {node {4}}
+            child {node {5}}
+          }}
+        }
+        child {node {6}}
+      }
+      child {node {7}}
+      child {node {8}
+        child {node {9} {
+          child {node {10} {
+            child {node {11}}
+            child {node {12}}
+          }}
+        }}
+        child {node {13}}
+      };
+\end{tikzpicture}
 
 \subparagraph{Implementierung} Tiefensuche (depth first search)
 \begin{enumerate}
