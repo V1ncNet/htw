@@ -166,14 +166,44 @@ Zur Darstellung von Graphen werden \textbf{Adjazenzmatrizen} und \textbf{Adjazen
           $v\in V$ mit $\{u,v\}\in E$ besitzt.
 \end{itemize}
 Der Speicherbedarf der Adjazenzmatrix liegt in $O(|V|^2)$, der der Adjazenzliste in $O(|V|+|E|)$. Bei
-Graphen mit wenig Kanten ist die Adjazenzliste im Vorteil.\\
-\\ % TODO Draw sample Graphs
+Graphen mit wenig Kanten ist die Adjazenzliste im Vorteil.\parskp
+\\
+\begin{tikzpicture}
+    \node[shape=circle,draw=black] (4) at (0,0) {4};
+    \node[shape=circle,draw=black] (1) at (2,2) {1};
+    \node[shape=circle,draw=black] (3) at (2,0) {3};
+    \node[shape=circle,draw=black] (2) at (4,1) {2};
+
+    \path (4) edge (3);
+    \path (3) edge (1);
+    \path (1) edge (2);
+    \path (2) edge (3);
+\end{tikzpicture}\\
+\[
+    \begin{pmatrix}
+        0 & 1 & 1 & 0 \\
+        1 & 0 & 1 & 0 \\
+        1 & 1 & 0 & 1 \\
+        0 & 0 & 1 & 0
+    \end{pmatrix}
+\]
+\begin{align*}
+    \fbox{1} & \rightarrow\fbox{2}\fbox{3} \\
+    \fbox{2} & \rightarrow\fbox{2}\fbox{3} \\
+    \fbox{3} & \rightarrow\fbox{1}\fbox{2}\fbox{4} \\
+    \fbox{4} & \rightarrow\fbox{3}
+\end{align*}\\
 Wurzelb"aume lassen sich durch rekursive Datenstrukturen darstellen. Jeder Knoten enth"alt dabei eine Liste
 der Nachfolgeknoten. Ein bin"arer Wurzelbaum l"asst sich darstellen durch Knotenelemente, die Zeiger links
 und rechts, f"ur den linken bzw. rechten Nachfolger besitzt.
 
 \paragraph{Beisiel} Implementierung in C
-% TODO Draw sample Graphs
+\begin{lstlisting}[language=C]
+struct bintree {
+    int value;
+    struct bintree *left, *right;
+}
+\end{lstlisting}
 
 \section{Grundlegende Graphenalgorithmen}
 \subsection{Breitensuche und Tiefensuche}
