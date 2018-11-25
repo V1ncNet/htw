@@ -90,8 +90,15 @@ Die Summe aller Knotengrade ist dann die Anzahl der Knotenh"alften.
 
 \paragraph{Definition}
 \begin{itemize}
-    \item Ein \textbf{Weg} ist eine Folge von Knoten $v_0,\cdots,v_l$ mit $\{v_k,v_{k+1}\}$ f"ur $1\le k<l$.
-          % TODO Draw sample Graphs
+    \item Ein \textbf{Weg} ist eine Folge von Knoten $v_0,\cdots,v_l$ mit $\{v_k,v_{k+1}\}$ f"ur $1\le k<l$.\\
+          \begin{tikzpicture}
+              \node[shape=circle,draw=black] (1) at (0,0) {$v_0$};
+              \node[shape=circle,draw=black] (2) at (2,0) {$v_1$};
+              \node[shape=circle,draw=black] (3) at (4,0) {$v_l$};
+
+              \path (1) edge (2);
+              \path (2) edge (3);
+          \end{tikzpicture}
     \item Ein Graph ist \textbf{zusammenh"angend}, wenn es f"ur alle Knoten $u,v$, $u\ne v$ einen Weg von $u$
           nach $v$ gibt.
     \item Ein \textbf{Pfad} ist ein Weg, der keine Knoten mehrfach enth"alt.
@@ -104,14 +111,38 @@ Die Summe aller Knotengrade ist dann die Anzahl der Knotenh"alften.
 \paragraph{Definition} \parskp
 Ein \textbf{Baum} ist ein zusammenh"angender Graph, der keinen Kreis enth"alt.\\
 \\
-Ein Blatt ist ein Knoten mit dem Grad $\le1$
-% TODO Draw sample Graphs
+Ein Blatt ist ein Knoten mit dem Grad $\le1$\\
+\begin{tikzpicture}[level distance=1.5cm,
+    level 2/.style={sibling distance=3cm},
+    level 3/.style={sibling distance=1.5cm}]
+    \node[shape=circle,draw=black] {}
+      child {node[shape=circle,draw=black] {}
+        child {node[shape=circle,draw=black] {}
+          child {node[shape=circle,draw=black] {}}
+          child {node[shape=circle,draw=black] {}}
+        }
+        child {node[shape=circle,draw=black] {}
+          child {node[shape=circle,draw=black] {}}
+          child {node[shape=circle,draw=black] {}}
+        }
+      };
+\end{tikzpicture}\hspace{2.5cm}
+\begin{tikzpicture}
+    \node[shape=circle,draw=black] {};
+\end{tikzpicture} \qquad \tgrey{Ist auch ein Baum}
 
 \paragraph{Lemma} Jeder Baum enth"alt ein Blatt.
 
 \paragraph{Satz} Sei $B=(V,E)$ ein Baum. \\
-Dann gilt $|E|=|V|-1$.
-% TODO Draw sample Graph
+Dann gilt $|E|=|V|-1$.\\
+\begin{tikzpicture}
+    \node[shape=circle,draw=black] (1) at (0,2)   {1.};
+    \node[shape=circle,draw=black] (2) at (1,0)   {2.};
+    \node[shape=circle,draw=black] (3) at (3,1.5) {3.};
+
+    \path (1) edge node[below] {1.} (2);
+    \path (2) edge node[above] {2.} (3);
+\end{tikzpicture}\qquad \tgrey{Es gibt nur einen Knoten, dem keine Kante hinzugef"ugt wird.}
 
 \paragraph{Beweis} Induktion nach der Anzahl der Knoten $n$
 \begin{itemize}
@@ -149,6 +180,7 @@ Sei $B$ ein bin"arer Wurzelbaum, in dem jeder Pfad von der Wurzel zu einem Blatt
                             $2^{k+1}$ Bl"atter.
 \end{itemize}
 
+\newpage
 \section{Datenstrukturen zur Representation}
 
 Zur Darstellung von Graphen werden \textbf{Adjazenzmatrizen} und \textbf{Adjazenzlisten} verwendet.
@@ -309,6 +341,21 @@ Die Tiefensuche verfolgt den Pfad, bis ein Knoten keine unbesuchten Nachbarn meh
           \textit{last in first out} (LIFO) Datentyp, der sich durch eine verkettete Liste implementieren
           l"asst und zwei Operationen besitzt \code{push} und \code{pop}.
     \item Rekursiv. In jedem Nachbarknoten wird eine neue Tiefensuche gestartet.
+          \begin{lstlisting}[language=C]
+          dfs(Graph G, node v) {
+              u.visited = true
+              for (v in G.adj[v])
+                if (v.visited == false) dfs(G, v)
+          }
+
+          init(Graph G, node v) {
+              for (v in G) {
+                u.visited = false
+                for (v in G)
+                  dfs(G, v)
+              }  
+          }
+          \end{lstlisting}
 \end{enumerate}
 
 \paragraph{Definition} Sei $G=(V,E)$ ein \textbf{DAG} (directed acyclic graph, gerichteter azyklischer Graph)\\
