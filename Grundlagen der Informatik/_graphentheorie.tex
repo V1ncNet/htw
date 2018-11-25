@@ -52,7 +52,7 @@ Graph $G=(\{1,2,3\},\{1,2\},\{2,3\},\{3,1\})$\\
 Graph $H=(\{1,2,3\},\{1,2\})$
 
 \paragraph{Definition} \parskp
-Ein Graph hei"st vollst"andig, wenn alle Knoten paawrweise miteinander verbunden sind.
+Ein Graph hei"st vollst"andig, wenn alle Knoten paarweise miteinander verbunden sind.
 \subparagraph{Folgerung} Ein vollst"andiger Graph mit $n$ Knoten besitzt $\binom{n}{2}$ Kanten.
 
 \paragraph{Definition}  \parskp
@@ -61,7 +61,7 @@ Ein Knoten $v$ besitzt den Grad $k$, wenn er mit genau $k$ Kanten verbunden ist.
 
 \paragraph{Satz} F"ur jeden Graphen $(V,E)$ gilt
 \begin{align*}
-    \sum_{v\in V}deg=2|E|
+    \sum{v\in V}deg=2|E|
 \end{align*}
 
 \begin{tikzpicture}
@@ -169,7 +169,7 @@ Dazu gelichwetig ist die folgende \underline{induktive Definition}.
 
 \paragraph{Satz} \parskp
 Sei $B$ ein bin"arer Wurzelbaum, in dem jeder Pfad von der Wurzel zu einem Blatt der L"ange $k$ hat
-($B$ besitzt die L"ange $k$), dann besitzt $B$ genau $2^k$ Bl"atter. % TODO WTF?
+($B$ besitzt die L"ange $k$), dann besitzt $B$ genau $2^k$ Bl"atter.
 
 \subparagraph{Beweis} Induktion nach $k$.
 \begin{itemize}
@@ -267,7 +267,7 @@ Nachbarn, bis der Zielknoten gefunden wurde.
         }
       };
 \end{tikzpicture}
-\\ % TODO Draw sample Graphs
+\\
 Eine Breitensuche kann mit einer \textbf{Queue} implementiert werden. Eine Queue ist eine
 \textit{first in first out} (FIFO) Datenstruktur die zwei Operationen besitzt.
 \begin{itemize}
@@ -302,7 +302,7 @@ boolean bfs(node start, node end) {
 Das Initialisieren des Felds \code{discovered} ben"otigt die Zeit $O(|V|)$. Im Rumpf der \code{while} Schleife
 f"allt der Aufwand $O(deg(u))$ an. Der Gesamtaufwand der \code{while} Schleife ist
 \[
-    \sum_{u\in V}O(deg(u))\le c\sum_{u\in V}deg(u)=c2|E|\in O(|E|)    
+    \sum{u\in V}O(deg(u))\le c\sum{u\in V}deg(u)=c2|E|\in O(|E|)
 \]
 Der Aufwand insgesamt ist daher $O(|V|+|E|)$.
 
@@ -360,4 +360,3 @@ Die Tiefensuche verfolgt den Pfad, bis ein Knoten keine unbesuchten Nachbarn meh
 
 \paragraph{Definition} Sei $G=(V,E)$ ein \textbf{DAG} (directed acyclic graph, gerichteter azyklischer Graph)\\
 Eine \textbf{topologische Sortierung} von $G$ ist eine Abbildung $f:V\rightarrow\NN$ mit $f(u)>f(v)$ f"ur $(u,v)\in E$.
-% TODO Draw sample Graph
