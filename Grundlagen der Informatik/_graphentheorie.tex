@@ -360,3 +360,148 @@ Die Tiefensuche verfolgt den Pfad, bis ein Knoten keine unbesuchten Nachbarn meh
 
 \paragraph{Definition} Sei $G=(V,E)$ ein \textbf{DAG} (directed acyclic graph, gerichteter azyklischer Graph)\\
 Eine \textbf{topologische Sortierung} von $G$ ist eine Abbildung $f:V\rightarrow\NN$ mit $f(u)>f(v)$ f"ur $(u,v)\in E$.
+\\
+\lecdate{26.11.2018}
+\\
+Eine topologische Sortierung kann durch eine Tiefensuche bestimmt werden.
+\begin{lstlisting}
+    topsort:
+        for (v in V)
+            markiere v mit weiß
+        for (v in V)
+            tiefensuche(v)
+
+    tiefensuche(v)
+        v grau: Fehler, da Graph einen Kreis enthält
+        v weiß: markiere v mit grau
+            for {u|(v,u) in E}
+                tiefensuche(u)
+            markiere v mit schwarz und füge v an den Kopf der sortierten Liste an
+\end{lstlisting}
+
+\section{Suche}
+\subsection{Lineare Suche}
+
+Laufzeit \(O(n)\), daher ung"unstig bei gro"sen \(n\)
+
+\subsection{Bin"are Suche}
+
+Voraussetzung f"ur eine \textbf{bin"are Suche} ist ein sortiertes Array.
+
+\paragraph{Idee des Algorithmus}
+Das gesuchte Element wird mit dem Element in der Mitte des Arrays verglichen. Ist es kleiner, wird in der linken H"alfte des Arrays weitergesucht,
+sont in der rechten H"alfte. Das Verfahren wird beendet, wenn das Element gefunden wurde oder die H"alften die L"ange 0 beistzten.
+
+\paragraph{Beispiel} Suche nach \(8\) in \(\{1,3,4,5,6,10,11,15,16,22,30\}\)\\
+\begin{tabular}{ m{11cm} m{5cm} }
+\begin{tikzpicture}
+    \foreach \x in {0,...,10} {
+        \node at (\x, 0) {\tred{\x}};
+    }
+    \node (0) [draw, minimum width=1cm] at (0, -0.5) {1};
+    \node (1) [draw, minimum width=1cm] at (1, -0.5) {3};
+    \node (2) [draw, minimum width=1cm] at (2, -0.5) {4};
+    \node (3) [draw, minimum width=1cm] at (3, -0.5) {5};
+    \node (4) [draw, minimum width=1cm] at (4, -0.5) {6};
+    \node (5) [draw, minimum width=1cm] at (5, -0.5) {10};
+    \node (6) [draw, minimum width=1cm] at (6, -0.5) {11};
+    \node (7) [draw, minimum width=1cm] at (7, -0.5) {15};
+    \node (8) [draw, minimum width=1cm] at (8, -0.5) {16};
+    \node (9) [draw, minimum width=1cm] at (9, -0.5) {22};
+    \node (10) [draw, minimum width=1cm] at (10, -0.5) {30};
+
+    \node (2r) [draw=red, minimum width=0.9cm, minimum height=0.4cm] at (2, -0.5) {};
+    \node (4r) [draw=red, minimum width=0.9cm, minimum height=0.4cm] at (4, -0.5) {};
+    \node (5r) [draw=red, minimum width=0.9cm, minimum height=0.4cm] at (5, -0.5) {};
+
+    \node (2n) at (2, -1) {\tred{2.}};
+    \node (4n) at (4, -1) {\tred{3.}};
+    \node (5n) at (5, -1) {\tred{1.}};
+\end{tikzpicture} &
+8 konnte nicht gefunden werden.
+\end{tabular}
+
+\rule{\textwidth}{0.2pt}
+\\
+\\
+\begin{tikzpicture}[level distance=1.5cm,
+    level 1/.style={sibling distance=3cm},
+    level 2/.style={sibling distance=1.5cm}]
+    \begin{scope}[every node/.style={draw, circle, thin}]
+    \node (0) {}
+    child {node (1) {}
+      child {node (2) {}}
+      child {node (3) {}}
+      child {node (4) {}}
+    }
+    child {node (5) {}}
+    child {node (6) {}
+      child {node (7) {}}
+      child {node (8) {}}
+      child {node (9) {}}
+    };
+    \end{scope}
+
+    \path (0) edge node[above] {\(<\)} (1);
+    \path (1) edge node[above] {\(<\)} (2);
+    \path (1) edge node[left] {\(=\)} (3);
+    \path (1) edge node[above] {\(>\)} (4);
+    \path (0) edge node[left] {\(=\)} (5);
+    \path (0) edge node[above] {\(>\)} (6);
+    \path (6) edge node[above] {\(<\)} (7);
+    \path (6) edge node[left] {\(=\)} (8);
+    \path (6) edge node[above] {\(>\)} (9);
+\end{tikzpicture}\qquad
+\begin{tikzpicture}[scale=0.7]
+    \draw (0,0) rectangle (6,1);
+    \draw (3,0) -- (3,1);
+    \node at (2,-0.3) {\(\le\)};
+    \node at (4,-0.3) {\(>\)};
+
+    \draw (0,1.5) rectangle (2.5,2.5);
+    \draw (3.5,1.5) rectangle (6,2.5);
+    \node at (7.3,2.75) {Problem};
+
+    \node at (1.25,4.3) {\(<\)};
+    \node at (3,4.3) {\(=\)};
+    \node at (4.75,4.3) {\(>\)};
+    \draw (0,3) rectangle (6,4);
+    \draw (2.5,3) -- (2.5,4);
+    \draw (3.5,3) -- (3.5,4);
+    \node at (7.3,0.5) {L"osung};
+\end{tikzpicture}
+
+\paragraph{Laufzeitanalyse} \parskp
+Wir vereinfachen dazu den Algorithmus so, dass nur Vergleiche mit \(\le\) und \(>\) ausgef"uhrt werden und das Array stets halbiert wird. Ferner
+nehmen wir an, dass die L"ange des Arrays \(2^k\) ist. Dann l"asst sich das Verhlaten der bin"aren Suche im Worst-Case (Element nicht vorhanden)
+als vollst"andiger Bin"arbaum darstellen.\\
+\begin{tabular}{ m{8cm} m{8cm} }
+\begin{tikzpicture}[level distance=1.5cm,
+    level 1/.style={sibling distance=4cm},
+    level 2/.style={sibling distance=2cm},
+    level 3/.style={sibling distance=1.5cm}]
+    \node[shape=circle,draw=black] {}
+    child {node[shape=circle,draw=black] {}
+      child {node[shape=circle,draw=black] {}
+        child {node[shape=circle,draw=black] {}}
+        child {node[shape=circle,draw=black] {}}}
+      child {node[shape=circle,draw=black] {}
+        child {node[shape=circle,draw=black] {}}
+        child {node[shape=circle,draw=black] {}}
+      }
+    }
+    child {node[shape=circle,draw=black] {}
+      child {node[shape=circle,draw=black] {}
+        child {node[shape=circle,draw=black] {}}
+        child {node[shape=circle,draw=black] {}}}
+      child {node[shape=circle,draw=black] {}
+        child {node[shape=circle,draw=black] {}}
+        child {node[shape=circle,draw=black] {}}
+      }
+    };
+\end{tikzpicture} &
+Jedes Blatt entspricht einem Vergliech mit \(n\)-Feldelementen. Der Baum besitzt daher die Tefe \(k=\log n\).
+\end{tabular}\\
+\\
+\\
+Die Laufzeit der bin"aren Suche liegt daher in \(O(\log n)\).
