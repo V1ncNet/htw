@@ -18,4 +18,4 @@ cleanall: $(BINARY)
 
 clean:
 
-praktikum-06: 062-fibonacci.class 062-fibonacci_alt.class 062-fibonacci.out
+praktikum-06: 062-fibonacci.class 062-fibonacci_alt.class 062-fibonacci.out 063-primes.out

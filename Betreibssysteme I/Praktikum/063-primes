@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Full recursive version
+
+function infinitySeq() {
+  number=$1
+  echo $number
+  let number++
+  infinitySeq $number
+}
+
+function filter() {
+  prime=$1
+  read number
+  [ $(( $number % $prime )) -ne 0 ] && echo $number 
+  filter $prime
+}
+
+
+function primes() {
+  read prime
+  echo $prime
+  filter $prime | primes
+}
+
+infinitySeq 2 | primes | head -$1
