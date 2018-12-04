@@ -505,3 +505,24 @@ Jedes Blatt entspricht einem Vergliech mit \(n\)-Feldelementen. Der Baum besitzt
 \\
 \\
 Die Laufzeit der bin"aren Suche liegt daher in \(O(\log n)\).
+
+\subsection{Binäre Suchbäume}
+\lecdate{03.12.2018}
+Ein Suchbaum ist ein bin"arer Wurzelbaum, in dem gilt, dass jeder in einem Knoten gespeicherter Wert gr"o"ser ist,
+als alle Knoten in seinem linken Teilbaum und kleiner ist, als alle Knoten in seinem rechten Teilbaum.
+
+\paragraph{Beispiel} \parskp
+\begin{tikzpicture}[level distance=1.5cm,
+    level 1/.style={sibling distance=3cm},
+    level 2/.style={sibling distance=1.5cm},
+    every node/.style={draw, circle, thin}]
+    \node {5}
+      child {node {3}
+        child {node {2}}
+        child {node {4}}
+      }
+      child {node {8}
+        child {node {6}}
+        child {node {9}}
+      };
+\end{tikzpicture}
