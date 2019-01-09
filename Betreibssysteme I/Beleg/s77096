@@ -1,0 +1,65 @@
+#!/bin/bash
+
+URL="http://ilpro122.informatik.htw-dresden.de/logs/"
+MODE=0
+
+ARGS1="ipo51 ipc88 ilpro122 fohls all"
+ARGS2="root users login"
+
+function usage {
+    echo
+    echo "Usage:"
+}
+
+function validate_ip {
+    local ip=$1
+    local stat=1
+
+    if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        OIFS=$IFS
+        IFS='.'
+        ip=($ip)
+        IFS=$OIFS
+        [[ ${ip[0]} -le 255 && ${ip[1]} -le 255 && ${ip[2]} -le 255 && ${ip[3]} -le 255 ]]
+            stat=$?
+    fi
+
+    return $stat;
+}
+
+function error {
+    echo -e "\e[31m$1\e[39m"
+}
+
+if [ "$#" -ne 1 ] && [ "$#" -ne 2 ]; then
+    error "Illegal number of arguments"
+    usage
+    exit 1
+fi
+
+if [ "$#" == 1 ]; then
+    validate_ip $1 || (error "Malformed IP address"; exit 1)
+fi
+
+if [ "$#" == 2 ]; then
+    MODE=1
+
+    if [[ ! $ARGS1 == *"$1"* ]]; then
+        error "Illegal first argument"
+        usage
+        exit 1
+    fi
+
+    if [[ ! $ARGS2 == *"$2"* ]]; then
+        error "Illegal second argument"
+        usage
+        exit 1
+    fi
+fi
+
+TMPDIR="$(mktemp -d)"
+wget -rq --no-parent -A "*.log*" -p $TMPDIR $URL
+ls -lah $TMPDIR
+
+# rm -Rf "$TMPDIR"
+exit 0
