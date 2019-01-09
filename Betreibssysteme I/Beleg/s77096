@@ -48,8 +48,7 @@ function validate_ip {
 
 # Removes the TMPDIR
 function cleanup {
-    # rm -Rf $TMPDIR
-    return 0
+    rm -Rf $TMPDIR
 }
 
 # Prints an error message, calls cleanup and exits the script with 1
