@@ -7,7 +7,7 @@ HOSTS="ipo51 ipc88 ilpro122 fohls all"
 USERS="root users login"
 
 # TMPDIR="$(mktemp -d)"
-TMPDIR="/tmp/tmp.Uvsdr5RgCu"
+TMPDIR="/tmp/tmp.bbUJ8WjWMi"
 
 function usage {
     echo
@@ -41,6 +41,7 @@ function error {
     exit 1
 }
 
+# TODO Replace with switch-case
 if [ "$#" -ne 1 ] && [ "$#" -ne 2 ]; then
     usage
     error "Illegal number of arguments"
@@ -69,6 +70,8 @@ if [ "$#" == 2 ]; then
     USER="$2"
 fi
 
+
+# Start
 echo "Downloading logs from $URL to $TMPDIR"
 
 # Download log files
@@ -85,16 +88,28 @@ echo "Decompress rotated log files"
 # Find and uncompress all gz files
 find $TMPDIR -type f -name "*.gz" -exec gzip -d "{}" \;
 
+echo "Decompressed log files"
+
 if [ $MODE -eq 1 ]; then
     if [ $HOST == "all" ]; then
         HOST="auth"
     fi
 
     FILES="$(find $TMPDIR -type f -name "*$HOST*")"
-fi
 
-cat $FILES | grep "Failed password for root" | awk '{print $11}' | sort -V | uniq -c # Sort by IP (version number) https://www.madboa.com/geek/sort-addr/
-cat $FILES | grep "Failed password for root" | awk '{print $11}' | uniq -c | sort -n # Sort by appereance (version number)
+    case "$USER" in
+        "root")
+            # Find given phrase in all logs, get unique IPs from the result und print them in order of appearance
+            cat $FILES | grep "Failed password for root" | awk '{print $11}' | sort | uniq -c | sort -n
+            ;;
+        "users")
+            cat $FILES | grep "Failed password for invalid user" | awk '{print $13}' | sort | uniq -c | sort -n
+            ;;
+        "login")
+            cat $FILES | grep "Failed password for invalid user" | awk '{print $11}' | sort | uniq -c | sort -n
+            ;;
+    esac
+fi
 
 cleanup
 exit 0
